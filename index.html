@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Spoiler</title>
-    <style>
-      .spoiler-content{
-          display: inline;          
-          opacity: 0;
-          overflow: hidden;
-          transition: opacity 0.5s;
-      }
-      .visible{
-          display: block;
-          opacity: 1;
-      }
-    </style>
+    <title>Systemes d'onglets</title>
+    <link rel="stylesheet" href="tabs.css">
 </head>
 <body>
-    
-        <span class="spoiler">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi tenetur, ipsa similique veritatis facere harum illo tempore mollitia hic a consequuntur natus,</span> dicta repellendus delectus at rem esse iusto eum.
-    
-    
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. In, nesciunt, dolorum qui ratione totam beatae molestiae facere a soluta, possimus placeat! Rerum ratione maxime, <span class="spoiler">totam repellat enim voluptatem voluptates repellendus.</span>
-    
-    
-        <span class="spoiler">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure quibusdam quas accusantium expedita non. A nulla distinctio illum architecto esse vero exercitationem eligendi, asperiores, </span> delectus provident ut sunt ducimus perferendis.
-    
-
-   <script src="index.js"></script> 
+<div>
+    <ul class="tabs">
+        <li class="active"><a href="#home">Accueil</a></li>
+        <li><a href="#mentions">Mentions</a></li>
+        <li><a href="#about">A propos</a></li>
+    </ul>
+    <div class="tabs-content">
+            <div class="tab-content active" id="home">Dolor sit amet consectetur adipisicing elit. Impedit ipsam nisi at atque minima neque dolorem. Atque enim ut rem voluptas vero inventore, delectus omnis itaque quisquam, officia porro labore.</Lorem></div>
+            <div class="tab-content" id="mentions">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit ipsam nisi at atque minima neque dolorem. Atque enim ut rem voluptas vero inventore, delectus omnis itaque quisquam, officia porro labore.</Lorem></div>
+            <div  class="tab-content" id="about">Sit amet consectetur adipisicing elit. Impedit ipsam nisi at atque minima neque dolorem. Atque enim ut rem voluptas vero inventore, delectus omnis itaque quisquam, officia porro labore.</Lorem></div>
+    </div>
+</div>
+ 
+<script src="tabs.js"></script>
 </body>
 </html>

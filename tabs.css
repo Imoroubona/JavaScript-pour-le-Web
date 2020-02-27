@@ -1,11 +1,14 @@
+
+
+.tabs .active a{
+    color: #FF0000;
+}
+
 .tab-content{
     display: none;
 }
 
-.tab-content.active{
-    display: block;
-}
 
-.tabs .active a{
-    color: #ff0000;
+.tab-content.active{
+    display: block; 
 }

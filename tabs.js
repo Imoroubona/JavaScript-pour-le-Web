@@ -1,57 +1,54 @@
-/**
- * Lorsqu'on clique sur un onglet,
- *    On retire la classe active de l'onglet actif
- *    On ajoute la classe active à l'onglet cliqué
- *    On retire la classe active du contenu actif
- * On ajoute la classe active au contenu correspondant à l'onglet cliqué
- * 
-    var tabs = document.querySelectorAll('.tabs a');
-    tabs.forEach(element => {
 
-       var div = element.parentNode.parentNode.parentNode;
-       var li = element.parentNode;
 
+ var tabs = document.querySelectorAll('.tabs a');
+
+   var afficherOnglet = function(a){
+         var li = a.parentNode;
+         var div = a.parentNode.parentNode.parentNode;
+         var activeTab = div.querySelector('.tab-content.active');
+         var aAfficher = div.querySelector(a.getAttribute('href'));
+      //si l'onglet cliqué contient la classe active, on arrête l'execution du reste script
+      if (li.classList.contains('active')) {
+         return false;
+      }
+      //On supprime la classe active de l'onglet actuellement actif
+      div.querySelector('.tabs .active').classList.remove('active');
+      //On ajoute la classe active à l'onglet actif
+      li.className = "active";
+      // On supprime la classe active du contenu actuellement actif
+      //div.querySelector('.tab-content.active').classList.remove('active');
+      //On ajoute la classe active au contenu correspondant à l'onglet cliqué
+      //  div.querySelector(a.getAttribute('href')).classList.add('active');
+
+
+      //On ajoute la classe fade au contenu actif
+       var activeTab = div.querySelector('.tab-content.active');
+           activeTab.classList.add('fade');
+           activeTab.classList.remove('in');
+           activeTab.addEventListener('transitionend', function(){
+                this.classList.remove('fade');
+                this.classList.remove('active');
+                aAfficher.classList.add('active');
+                aAfficher.classList.add('fade');
+                aAfficher.offsetWidth;
+                aAfficher.classList.add('in');
+
+
+        });
+
+   }
+
+
+   tabs.forEach(element => {
       element.addEventListener('click', function(e){
-         if (li.classList.contains('active')) {
-            return false;
-         }
-         div.querySelector('.tabs .active').classList.remove('active');
-         li.className = 'active';
-         //On retire la classe active du contenu actif
-         div.querySelector('.tab-content.active').classList.remove('active');
-         //On ajoute la classe active au contenu correspondant à l'onglet cliqué
-         div.querySelector(this.getAttribute('href')).classList.add('active');
+         afficherOnglet(element);
       });
-    });
- 
- */
-
-var AfficherOnglet = function(a){
-   var div = a.parentNode.parentNode.parentNode;
-   var li = a.parentNode;
-   if (li.classList.contains('active')) {
-      return false;
-   } 
-  //On retire la classe active de l'onglet actif
-  div.querySelector('.tabs .active').classList.remove('active');
-  //On ajoute la classe active à l'onglet cliqué
-  li.className = "active";
-  //On retire la classe active du contenu actif
-  div.querySelector('.tab-content.active').classList.remove('active');
-  //On ajoute la classe active au contenu correspondant à l'onglet cliqué
-  div.querySelector(a.getAttribute('href')).classList.add('active');
-}
-
-var tabs = document.querySelectorAll('.tabs a');
- tabs.forEach((tab)=>{
-    tab.addEventListener('click', function(e){
-      AfficherOnglet(this);
-    });
-});
+   });
 
 
-var hash = window.location.hash;
-var a = document.querySelector('a[href ="' + hash +' "]');
-if (a !== null && !a.parentNode.contains('active')) {
-   AfficherOnglet(a);
-}
+
+   var hash = window.location.hash;
+   var a = document.querySelector('a[href = "' + hash +'"]');
+   if ( a!= null && !a.parentNode.classList.contains('active') ) {
+      afficherOnglet(a);
+   }

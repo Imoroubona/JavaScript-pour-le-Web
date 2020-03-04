@@ -2,7 +2,10 @@
 
  var tabs = document.querySelectorAll('.tabs a');
 
-   var afficherOnglet = function(a){
+   var afficherOnglet = function(a, animations){
+     if (animations === undefined) {
+       animations = true;
+     }
          var li = a.parentNode;
          var div = a.parentNode.parentNode.parentNode;
          var activeTab = div.querySelector('.tab-content.active');
@@ -22,21 +25,24 @@
 
 
       //On ajoute la classe fade au contenu actif
-       var activeTab = div.querySelector('.tab-content.active');
-           activeTab.classList.add('fade');
-           activeTab.classList.remove('in');
-           activeTab.addEventListener('transitionend', function(){
-                this.classList.remove('fade');
-                this.classList.remove('active');
-                aAfficher.classList.add('active');
-                aAfficher.classList.add('fade');
-                aAfficher.offsetWidth;
-                aAfficher.classList.add('in');
+       if (animations) {
+         var activeTab = div.querySelector('.tab-content.active');
+             activeTab.classList.add('fade');
+             activeTab.classList.remove('in');
+             activeTab.addEventListener('transitionend', function(){
+                  this.classList.remove('fade');
+                  this.classList.remove('active');
+                  aAfficher.classList.add('active');
+                  aAfficher.classList.add('fade');
+                  aAfficher.offsetWidth;
+                  aAfficher.classList.add('in');
+          });
+      }else{
+            aAfficher.classList.add('active');
+            activeTab.classList.remove('active');
+      }
+  }
 
-
-        });
-
-   }
 
 
    tabs.forEach(element => {
@@ -50,5 +56,5 @@
    var hash = window.location.hash;
    var a = document.querySelector('a[href = "' + hash +'"]');
    if ( a!= null && !a.parentNode.classList.contains('active') ) {
-      afficherOnglet(a);
+      afficherOnglet(a, false);
    }

@@ -26,17 +26,23 @@
 
       //On ajoute la classe fade au contenu actif
        if (animations) {
-         var activeTab = div.querySelector('.tab-content.active');
              activeTab.classList.add('fade');
              activeTab.classList.remove('in');
-             activeTab.addEventListener('transitionend', function(){
-                  this.classList.remove('fade');
-                  this.classList.remove('active');
-                  aAfficher.classList.add('active');
-                  aAfficher.classList.add('fade');
-                  aAfficher.offsetWidth;
-                  aAfficher.classList.add('in');
-          });
+             var transitionend = function(){
+                    this.classList.remove('fade');
+                    this.classList.remove('active');
+                    aAfficher.classList.add('active');
+                    aAfficher.classList.add('fade');
+                    aAfficher.offsetWidth;
+                    aAfficher.classList.add('in');
+                    activeTab.removeEventListener('transitionend', transitionend);
+                    activeTab.removeEventListener('webkitTransitionEnd', transitionend);
+                    activeTab.removeEventListener('otransitionend', transitionend);
+            }
+
+            activeTab.addEventListener('transitionend', transitionend);
+            activeTab.addEventListener('webkitTransitionEnd', transitionend);
+             activeTab.addEventListener('otransitionend', transitionend);
       }else{
             aAfficher.classList.add('active');
             activeTab.classList.remove('active');
@@ -51,10 +57,12 @@
       });
    });
 
-
-
-   var hash = window.location.hash;
-   var a = document.querySelector('a[href = "' + hash +'"]');
-   if ( a!= null && !a.parentNode.classList.contains('active') ) {
-      afficherOnglet(a, false);
-   }
+  var haschange = function(e){
+    var hash = window.location.hash;
+    var a = document.querySelector('a[href = "' + hash +'"]');
+    if ( a!= null && !a.parentNode.classList.contains('active') ) {
+       afficherOnglet(a, e !== undefined);
+    }
+  }
+  window.addEventListener('haschange', haschange);
+  haschange();
